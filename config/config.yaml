@@ -5,3 +5,12 @@ paths:
 project:
   seed: 42
   target: churn
+
+# Business assumptions. They are NOT measured from the data: change them freely.
+# Monetary unit = unit of `customer_value` (undocumented, so not called euros).
+business:
+  offer_cost: 10          # cost of contacting one customer with a retention offer
+  success_rate: 0.30      # probability that the offer keeps a customer who would leave
+  sensitivity:
+    success_rates: [0.1, 0.2, 0.3, 0.4, 0.5]
+    offer_costs: [5, 10, 20]
