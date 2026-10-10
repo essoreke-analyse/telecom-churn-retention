@@ -32,14 +32,14 @@ def test_evaluate_policy_counts():
     assert np.isclose(res["profit"], 40.0 - 10.0)
 
 
-def test_gain_rule_never_beats_hindsight_best_k():
+def test_hindsight_top_k_beats_contacting_everyone():
     rng = np.random.default_rng(0)
     n = 500
     proba = rng.random(n)
     y = (rng.random(n) < proba).astype(int)
     value = rng.uniform(0, 300, n)
     table = policy_table(y, value, proba, success_rate=0.3, cost=10)
-    best = table.loc["top-k by probability (best k, hindsight)", "profit"]
+    best = table.loc["top-k by probability (k chosen with hindsight)", "profit"]
     everyone = table.loc["contact everyone", "profit"]
     assert best >= everyone  # k = n is one of the candidates
 

@@ -59,7 +59,7 @@ def policy_table(y, value, proba, success_rate: float, cost: float) -> pd.DataFr
 
     rows = {
         "contact everyone": evaluate_policy(y, value, np.ones(len(y), bool), success_rate, cost),
-        "top-k by probability (best k, hindsight)": evaluate_policy(y, value, best_mask, success_rate, cost),
+        "top-k by probability (k chosen with hindsight)": evaluate_policy(y, value, best_mask, success_rate, cost),
         "expected-gain rule (applicable)": evaluate_policy(y, value, gain_mask, success_rate, cost),
     }
     return pd.DataFrame(rows).T
