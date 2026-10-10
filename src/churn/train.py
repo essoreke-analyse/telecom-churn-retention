@@ -69,14 +69,16 @@ def score_predictions(y_true, scores, frac: float = 0.2) -> dict:
     }
 
 
-def cross_validate(model, X, y, groups, n_splits: int = 5, seed: int = 42):
-    """Stratified + grouped CV (identical rows never straddle train and test).
+def cross_validate(model, X, y, groups, n_splits: int = 5, seed: int = 42, cv=None):
+    """Stratified + grouped CV by default (identical rows never straddle folds).
 
+    Pass `cv` to use another splitter (e.g. a naive StratifiedKFold).
     Returns (per-fold metrics, out-of-fold probabilities, fold id per row).
     """
     X = X.reset_index(drop=True)
     y = pd.Series(np.asarray(y)).reset_index(drop=True)
-    cv = StratifiedGroupKFold(n_splits=n_splits, shuffle=True, random_state=seed)
+    if cv is None:
+        cv = StratifiedGroupKFold(n_splits=n_splits, shuffle=True, random_state=seed)
 
     oof = np.zeros(len(y))
     fold_id = np.full(len(y), -1)
