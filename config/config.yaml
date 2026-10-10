@@ -1,0 +1,7 @@
+paths:
+  raw_data: data/raw/Customer Churn.csv
+  processed_data: data/processed/customers_clean.csv
+
+project:
+  seed: 42
+  target: churn
