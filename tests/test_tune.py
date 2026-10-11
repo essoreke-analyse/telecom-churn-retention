@@ -28,3 +28,4 @@ def test_nested_cv_runs_for_both_models():
         assert len(folds) == 3
         assert len(chosen) == 3
         assert ((oof >= 0) & (oof <= 1)).all()
+    

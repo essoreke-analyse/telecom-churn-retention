@@ -77,3 +77,4 @@ def test_real_dataset_features():
     assert out.shape == (3150, len(ALL_FEATURES) + 1)
     assert out.isnull().sum().sum() == 0
     assert duplicate_groups(out).nunique() < 3150
+    
