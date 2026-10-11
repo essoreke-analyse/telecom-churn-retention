@@ -41,6 +41,8 @@ The rule contacts a customer when `probability x success rate x value - cost > 0
 
 **Calibration.** Predicted probabilities match observed rates in the high-risk deciles (e.g. 0.49 predicted vs 0.52 observed), which the expected-gain rule relies on. Brier score 0.030 vs 0.132 for a constant prediction.
 
+Narrated analysis: [EDA](notebooks/01_eda.ipynb), [feature analysis](notebooks/02_feature_analysis.ipynb), [model comparison](notebooks/03_model_comparison.ipynb).
+
 ## Approach
 
 1. **Data validation** (`data.py`): column names normalised (the raw file has double spaces), expected columns, no missing values, allowed values. Tested.
@@ -120,7 +122,8 @@ Other steps: `python -m churn.train` (baseline), `python -m churn.compare` (mode
 ```
 config/       business assumptions, paths, seed
 data/         raw/ (not versioned), processed/ (generated)
-notebooks/    01_eda.ipynb
+notebooks/    01_eda, 02_feature_analysis, 03_model_comparison
+tools/        make_notebooks.py (regenerates notebooks 02 and 03)
 src/churn/    data, features, train, compare, tune, evaluate, explain, final, predict
 tests/        39 pytest tests
 models/       saved models (generated, not versioned)
