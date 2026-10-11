@@ -21,6 +21,7 @@ All scores come from **nested, stratified, grouped 5-fold cross-validation** (hy
 | Gradient boosting, tuned, **early-warning** version | 0.978 | 0.906 | 93% |
 
 A random model has a PR-AUC of 0.157. The standard deviation of PR-AUC across folds is about 0.03.
+The logistic baseline is scored with the same grouped stratified CV but without tuning; the boosting rows use nested CV.
 
 **Two versions of the model.** `complains` and `is_inactive` are very predictive but may be *consequences* of leaving rather than early signals, and the dataset does not say when they were measured. The *early-warning* version drops them and keeps most of the performance.
 
@@ -57,7 +58,7 @@ Narrated analysis: [EDA](notebooks/01_eda.ipynb), [feature analysis](notebooks/0
 
 - **Usage is the strongest signal.** Churners use the service about 3 times less (median 1,182 vs 3,530 seconds). `frequency_of_use` is the top feature in both model versions.
 - **Complaints and inactivity are strong but incomplete.** 83% of complainers churn, but only 40% of churners complained; 75% of churners were already inactive. The 125 churners still active are the ones a campaign can realistically save, and the model keeps a PR-AUC of 0.93 (full) and 0.85 (early-warning) on them.
-- **`call_failure` and `subscription_length` do not separate churners on their own** (univariate AUC about 0.47) **but matter a lot once usage is controlled**.
+- **`call_failure` and `subscription_length` do not separate churners on their own** 0.53 (0.5 = no separation) **but matter a lot once usage is controlled**.
 - **Churners are only 4.2% of total customer value** (15.7% of customers), so retention offers must be cheap.
 - **Contract customers almost never churn** (2.4%), but this is not proof that contracts *cause* loyalty.
 
@@ -132,7 +133,6 @@ reports/figures/
 
 ## Author
 
-Essoréké Kiheou, Master MBFA (Assurance), Le Mans Université & Mastet Etude Economiques et Statistiques. [GitHub](https://github.com/essoreke-analyse)
-
+Essoréké Kiheou, Master MBFA (Assurance), Le Mans Université, and Master in Economic Studies and Statistics. [GitHub](https://github.com/essoreke-analyse)
 
 Dataset: Iranian Churn, UCI Machine Learning Repository, https://doi.org/10.24432/C5JW3Z
